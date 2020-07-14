@@ -3,8 +3,10 @@ baltimore_data <- NEI %>%
   group_by(year, type) %>%
   summarise(Emissions=sum(Emissions))
 png(filename = "plot3.png")
-qplot(Year, Emissions, data = baltimore_data, color = type, geom = "line") +
-  ggtitle("Total Emissions of PM2.5 in Baltimore City By pollutant type") + 
-  ylab("Total Emissions (tons)") + 
-  xlab("Year") 
+chart <- ggplot(baltimore_data, aes(year, Emissions, color = type))
+chart <- chart + geom_line() +
+  xlab("year") +
+  ylab(expression('Total Emissions')) +
+  ggtitle('Total Baltimore Emissions [2.5]* From 1999 to 2008')
+print(chart)
 dev.off()
